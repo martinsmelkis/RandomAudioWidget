@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="org.ecosia.randomaudiowidget"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:name="org.ecosia.randomaudiowidget.App"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <receiver android:name="org.ecosia.randomaudiowidget.widget.RandomAudioWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/random_audio_widget_info" />
+        </receiver>
+
+        <service android:name="org.ecosia.randomaudiowidget.domain.service.RandomAudioPlayService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:enabled="true" android:exported="true" />
+
+        <activity android:name="org.ecosia.randomaudiowidget.PermissionActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
